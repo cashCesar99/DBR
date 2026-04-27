@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dead by randomness</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 class="titulo-principal">Dead by Randomness</h1>
+
+    <button class="btn-hamburguesa" onclick="abrirCerrarMenu()">☰</button>
+
+    <div id="ContenedorFiltro" style="position: absolute; display: flex; flex-direction: column; align-items: center; z-index: 100; font-family: sans-serif; width: 180px;">
+    
+    <span style="font-size: 16px; font-weight: bold; color: white; margin-bottom: 8px; text-shadow: 2px 2px 4px black; text-align: center;">Filter</span>
+    
+    <label class="switch-grande" style="position: relative; display: inline-block; width: 64px; height: 34px;">
+        <input type="checkbox" id="switchFiltro" style="opacity: 0; width: 0; height: 0;">
+        <span class="slider-grande-round"></span>
+    </label>
+    
+    <span class="carta-perk" data-nombre="Smart Filter" data-desc="Activating the filter prevents perks that conflict from being mixed, such as exhaustion perks (only one will appear) or No Mither with healing perks." style="margin-top: 10px; background: #444; color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; cursor: help; border: 1px solid #777;">?</span>
+</div>
+
+    <aside class="menu-lateral" id="MenuFiltros">
+        
+        <div style="position: sticky; top: 0; background-color: rgba(15, 15, 15, 0.95); z-index: 31; border-bottom: 1px solid #555; display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; box-sizing: border-box;">
+            
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="display: flex; align-items: center;">
+                    <label style="position: relative; display: inline-block; width: 50px; height: 24px;">
+                        <input type="checkbox" id="switchAll" onchange="ToggleTodos(this.checked)" checked style="opacity: 0; width: 0; height: 0;">
+                        <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2196F3; border-radius: 24px; transition: .4s;">
+                            <span id="sliderDot" style="position: absolute; content: ''; height: 18px; width: 18px; left: 28px; bottom: 3px; background-color: white; border-radius: 50%; transition: .4s;"></span>
+                        </span>
+                    </label>
+                </div>
+                
+                <button id="BtnCambioRol" onclick="alternarRol()" style="text-align: center; margin: 0; padding: 0; font-family: sans-serif; font-size: 1.5em; color: white; background: none; border: none; cursor: pointer; border-bottom: 2px solid #2196F3; font-weight: bold; ">
+                    Survivors
+                </button>
+                <span class="carta-perk" data-nombre="Role Switch" data-desc="Click on the role name (Survivors/Killers) to alternate between your inventories." style="background: #444; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; cursor: help; border: 1px solid #777; margin-left: 5px;">?</span>
+            </div>
+            
+            <button onclick="abrirCerrarMenu()" style="font-size: 35px; color: white; background: none; border: none; cursor: pointer; padding: 0;">X</button>
+        </div>
+
+        <div id="ContenedorSobreviviente" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px 15px; padding-bottom: 80px;">
+        </div>
+        
+    </aside>
+
+    <div class="capa-niebla niebla-1"></div>
+    <div class="capa-niebla niebla-2"></div>
+
+    <div class="santuario-wrapper">
+        <h3 style="font-family: cursive; margin: 0; margin-bottom: 10px; color: #a9a9a9; text-shadow: 1px 1px 2px black;">Shrine of Secrets</h3> 
+        
+        <div style="position: relative; width: 170px; height: 170px;">
+            <img src="./Resources/Images/Perks/Killer/Artist/scourge-hook-pain-resonance.webp" alt="Arriba" class="carta-perk" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 2; width: 75px; height: 75px; object-fit: contain;">
+            
+            <img src="./Resources/Images/Perks/Killer/Ghoul/none-are-free.webp" alt="Izquierda" class="carta-perk" style="position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 1; width: 75px; height: 75px; object-fit: contain;">
+            
+            <img src="./Resources/Images/Perks/Survivor/Jill/Resurgence2.webp" alt="Derecha" class="carta-perk" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); z-index: 1; width: 75px; height: 75px; object-fit: contain;">
+            
+            <img src="./Resources/Images/Perks/Survivor/Jane/Solidarity2.webp" alt="Abajo" class="carta-perk" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 2; width: 75px; height: 75px; object-fit: contain;">
+        </div>
+    </div>
+
+    <div class="spin-wrapper">
+        <img src="Resources/Images/Perks/Survivor/Dwight/S01_DwightFairfield_Portrait.png" id="RetratoRandom" style="width: 180px; height: 230px; object-fit: cover; border: 2px solid #555; border-radius: 5px; background-color: rgba(0,0,0,0.6);">
+        
+        <div class="btn-estilo-dbd" onclick="MezclarSobreviviente()" style="margin-top: 30px;">
+            <span style="font-family: cursive; font-size: 24px; color: white;">Spin</span>
+        </div>
+        
+    </div>
+
+    <div class="contenedor-principal">
+
+        <div class="centro-wrapper">
+            <img src="./Resources/Images/Perks/Random/Random.png" id="Arriba" alt="Arriba" class="carta-perk perk-pos perk-arriba" data-nombre="Uknown" data-desc="Press Shuffle to reveal the perk.">
+            
+            <img src="./Resources/Images/Perks/Random/Random.png" id="Izquierda" alt="Izquierda" class="carta-perk perk-pos perk-izquierda" data-nombre="Uknown" data-desc="Press Shuffle to reveal the perk.">
+            
+            <img src="./Resources/Images/Perks/Random/Random.png" id="Derecha" alt="Derecha" class="carta-perk perk-pos perk-derecha" data-nombre="Uknown" data-desc="Press Shuffle to reveal the perk.">
+            
+            <img src="./Resources/Images/Perks/Random/Random.png" id="Abajo" alt="Abajo" class="carta-perk perk-pos perk-abajo" data-nombre="Uknown" data-desc="Press Shuffle to reveal the perk.">
+
+        </div>
+
+        <div class="btn-estilo-dbd" onclick="MezclarPerks()" style="pointer-events: auto;">
+            <span style="font-family: cursive; font-size: 30px; color: white;">Shuffle</span>
+        </div>
+        
+    </div>
+
+    <div id="caja-tooltip">
+        <h4 id="tooltip-titulo">Nombre de la Perk</h4>
+        <p id="tooltip-desc">Descripción</p>
+    </div>
+
+    <script src="script.js"></script>
+    <!--
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Chesse@Tech@@@@@@@@@@@@@@@@@@@@@@@&&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@##B##@@@@@@B&@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@BGGG#@@&&&&&BP#&@@@@@@G&@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@BJJYY?5PYYB##&&&@@@@@@##@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@B5YYY5JJJ5#B##&@@@@@&#@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@&&#GPYJJGGPPB@@@@@B@&#GP#@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@&G5YYJJJ5P&&&&BYJJ7!??5&@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@#G5YYYYYYYYYY?J7J7??J??P&@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&BP555Y77J5?JJ77?Y?JP7?&@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@&#BGY?YPBGJ77JJ7???7Y57J7J&@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@#G5YJ?J7?5?7YJ??7J5?777?7?JJJ&@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@&PYJY?777??7J?77J5J???7777?Y7?J?&@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@P77?77??7777J7?77777777777?Y?!?&@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@&##BGGG55YJJ7?J?!7J77JY77?5??&@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&##BPP55PYJ????J#@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&#BG#@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+-->
+</body>
+</html>

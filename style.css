@@ -1,0 +1,263 @@
+/* --- 1. CONFIGURACIÓN BASE --- */
+html, body {
+    margin: 0; 
+    padding: 0;
+    width: 100%; 
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: black; 
+    color: white; 
+}
+
+/* --- 2. ANIMACIONES Y EFECTOS (NIEBLA) --- */
+@keyframes movimientoNiebla {
+    0% { background-position: 0 0;}
+    100% { background-position: 2000px 0; }
+}
+
+.capa-niebla {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-repeat: repeat-x;
+    background-size: 2000px 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.niebla-1 {
+    background-image: url('./Resources/Images/Fog1.4.png');
+    animation: movimientoNiebla 100s linear infinite;
+}
+
+.niebla-2 {
+    background-image: url('./Resources/Images/Fog2.4.png');
+    animation: movimientoNiebla 20s linear infinite;
+}
+
+/* --- 3. ELEMENTOS DE PERKS Y ROMBO --- */
+.carta-perk {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    cursor: help;
+}
+
+.centro-wrapper {
+    position: relative; 
+    width: 450px; 
+    height: 450px; 
+    margin: 30px 0; 
+    pointer-events: auto;
+}
+
+.perk-pos { position: absolute; }
+.perk-arriba { top: 10px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.perk-izquierda { top: 50%; left: 10px; transform: translateY(-50%); z-index: 1; }
+.perk-derecha { top: 50%; right: 10px; transform: translateY(-50%); z-index: 1; }
+.perk-abajo { bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 2; }
+
+/* --- 4. MENÚ LATERAL Y NAVEGACIÓN --- */
+.menu-lateral {
+    position: fixed;
+    left: 0; top: 0;
+    width: 500px;
+    height: 100%;
+    background-color: rgba(15, 15, 15, 0.95);
+    border-right: 2px solid #555;
+    overflow-y: auto;
+    z-index: 100;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    overscroll-behavior: contain;
+}
+
+.menu-lateral.abierto { transform: translateX(0); }
+
+.btn-hamburguesa {
+    position: absolute;
+    top: 20px; left: 20px;
+    font-size: 35px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 20;
+    text-shadow: 2px 2px 4px black;
+}
+
+.btn-cerrar {
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 35px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- 5. CONTENEDORES Y TÍTULOS --- */
+.contenedor-principal {
+    position: relative; 
+    top: 0; left: 0; width: 100%; 
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; 
+    z-index: 10; pointer-events: none; 
+}
+
+.titulo-principal {
+    position: absolute;
+    top: 10px; left: 0; width: 100%;
+    font-family: cursive;
+    font-size: 60px;
+    text-align: center;
+    margin: 0; 
+    pointer-events: auto;
+    filter: drop-shadow(-1px 21px 3px #000000);
+    z-index: 20;
+}
+
+.santuario-wrapper {
+    position: absolute; left: 5%; top: 50%; transform: translateY(-50%); 
+    display: flex; flex-direction: column; align-items: center; z-index: 10;
+}
+
+.spin-wrapper {
+    position: absolute; right: 5%; top: 55%; transform: translateY(-50%); 
+    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    z-index: 10; pointer-events: auto;
+}
+
+/* --- 6. TOOLTIP (DESCRIPCIONES) --- */
+#caja-tooltip {
+    position: fixed;
+    background-color: rgba(10, 10, 10, 0.95);
+    color: white;
+    border: 1px solid #555;
+    padding: 12px;
+    border-radius: 5px;
+    max-width: 250px;
+    z-index: 9999;
+    display: none;
+    pointer-events: none;
+    font-family: sans-serif;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
+
+#tooltip-titulo { margin: 0 0 8px 0; color: #ffeb3b; font-size: 16px; font-weight: bold; }
+#tooltip-desc { margin: 0; font-size: 13px; line-height: 1.4; color: #ddd; }
+
+/* --- 7. SWITCH Y FILTRO --- */
+#ContenedorFiltro {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: auto;
+}
+
+.switch-grande { cursor: pointer; position: relative; display: inline-block; width: 64px; height: 34px; }
+
+.slider-grande-round {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #333;
+    transition: .4s;
+    border-radius: 34px;
+    border: 2px solid #555;
+}
+
+.slider-grande-round:before {
+    position: absolute;
+    content: "";
+    height: 26px; width: 26px;
+    left: 3px; bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+#switchFiltro:checked + .slider-grande-round { background-color: #9c27b0; border-color: #ba68c8; }
+#switchFiltro:checked + .slider-grande-round:before { transform: translateX(30px); }
+
+/* ICONOS DE AYUDA (UNIFICADOS) */
+.icono-ayuda, .icono-ayuda-menu {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+    cursor: help;
+    border: 1px solid #555;
+    margin-left: 5px;
+    font-family: sans-serif;
+}
+
+.icono-ayuda:hover, .icono-ayuda-menu:hover { border-color: #eee; color: #ffeb3b; }
+
+/* --- 8. BOTONES ESTILO DBD --- */
+.btn-estilo-dbd {
+    cursor: pointer;
+    background-color: rgba(20, 20, 20, 0.9);
+    border: 2px solid #555;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    user-select: none;
+    clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+    padding: 10px 40px;
+    pointer-events: auto;
+}
+
+.btn-estilo-dbd:hover { background-color: #444; border-color: #eee; transform: translateY(-2px); }
+.btn-estilo-dbd:active { transform: scale(0.95); }
+
+.btn-morado:hover { background-color: #9c27b0; border-color: #ba68c8; }
+
+/* --- 9. RESPONSIVE (MÓVIL) --- */
+@media (max-width: 850px) {
+    .menu-lateral { width: 100%; }
+    
+    .contenedor-principal { justify-content: flex-start; padding-top: 320px; }
+    
+    .titulo-principal { font-size: 36px; }
+    .btn-hamburguesa { top: 60px; }
+    
+    .santuario-wrapper { 
+        top: 180px; left: 2%; 
+        transform: scale(0.7); transform-origin: top left; 
+    }
+    
+    .spin-wrapper { 
+        top: 170px; right: 2%; 
+        transform: scale(0.6); transform-origin: top right; z-index: 20; 
+    }
+    
+    .centro-wrapper { width: 300px; height: 300px; margin: 0; }
+    .carta-perk { width: 130px; height: 130px; }
+
+    #ContenedorFiltro {
+        top: 70px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+        opacity: 1; /* Aquí quitamos el !important usando especificidad */
+    }
+}
+
+/* Landscape Móvil */
+@media (max-width: 850px) and (orientation: landscape) {
+    .btn-hamburguesa { top: 15px; }
+    .contenedor-principal { padding-top: 150px; padding-bottom: 50px; }
+    .santuario-wrapper, .spin-wrapper { top: 90px; }
+}
+
+/* Colores Dinámicos */
+.distintivo-asesino {
+    border-bottom-color: #f44336 !important; 
+}
