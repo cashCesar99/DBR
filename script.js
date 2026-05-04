@@ -1,3 +1,72 @@
+//Lógica de usuario y autenticación (simulada con localStorage para persistencia básica)
+let usuarioActivo = null;
+
+function mostrarModal() {
+    document.getElementById("ModalLogin").style.display = "flex";
+    if (usuarioActivo) {
+        document.getElementById("TituloModal").innerText = "Hi, " + usuarioActivo;
+        document.getElementById("LoginAcciones").style.display = "none";
+        document.getElementById("LogoutAcciones").style.display = "flex";
+        document.getElementById("userInput").style.display = "none";
+        document.getElementById("passInput").style.display = "none";
+    } else {
+        document.getElementById("TituloModal").innerText = "Account Login";
+        document.getElementById("LoginAcciones").style.display = "flex";
+        document.getElementById("LogoutAcciones").style.display = "none";
+        document.getElementById("userInput").style.display = "block";
+        document.getElementById("passInput").style.display = "block";
+    }
+}
+
+function cerrarModal() {
+    document.getElementById("ModalLogin").style.display = "none";
+}
+
+function procesarLogin() {
+    const user = document.getElementById("userInput").value.trim();
+    const pass = document.getElementById("passInput").value.trim();
+
+    if (user === "" || pass === "") {
+        alert("Please fill all fields");
+        return;
+    }
+
+    // Guardar usuario (Si no existe, se crea; si existe, se asume login simple)
+    usuarioActivo = user;
+    localStorage.setItem("DbdRandom_UltimoUsuario", user);
+    
+    // Si es la primera vez que entra este usuario, creamos su base de datos vacía
+    if (!localStorage.getItem("DbdData_" + user)) {
+        guardarProgresoEnStorage();
+    } else {
+        cargarProgresoDesdeStorage();
+    }
+
+    actualizarInterfazUsuario();
+    cerrarModal();
+}
+
+function procesarLogout() {
+    usuarioActivo = null;
+    localStorage.removeItem("DbdRandom_UltimoUsuario");
+    actualizarInterfazUsuario();
+    // Opcional: Resetear menú a estado default al cerrar sesión
+    location.reload(); 
+}
+
+function actualizarInterfazUsuario() {
+    const nombreTxt = document.getElementById("NombreMostrado");
+    const icono = document.getElementById("IconoEstado");
+    
+    if (usuarioActivo) {
+        nombreTxt.innerText = usuarioActivo;
+        icono.style.background = "#9c27b0"; // Color morado al estar logueado
+    } else {
+        nombreTxt.innerText = "Guest";
+        icono.style.background = "#888";
+    }
+}
+
 // Variable de estado para el rol actual ("survivor" o "killer")
 let rolActual = "survivor";
 
@@ -1958,6 +2027,7 @@ function TogglePersonaje(index) {
     // Vuelve a dibujar el menú para que se vean los colores nuevos
     CargarMenu();
     RevisarEstadoSwitch();
+    guardarProgresoEnStorage();
 }
 
 // Cuando tocas una sola perk debajo del personaje
@@ -1978,6 +2048,7 @@ function TogglePerk(indexPersonaje, indexPerk) {
     
     CargarMenu();
     RevisarEstadoSwitch();
+    guardarProgresoEnStorage();
 }
 
 // Cuando tocas el Switch azul maestro arriba
@@ -2007,6 +2078,7 @@ function ToggleTodos(estado) {
         }
     });
     CargarMenu();
+    guardarProgresoEnStorage();
 }
 
 // Llama a estas dos funciones al abrir la página por primera vez
@@ -2238,19 +2310,43 @@ function posicionarFiltroFinal() {
     const filtro = document.getElementById('ContenedorFiltro');
     const retrato = document.getElementById('RetratoRandom');
     const titulo = document.querySelector(".titulo-principal");
-    
-    if (filtro && retrato && titulo) {
-        const rectRetrato = retrato.getBoundingClientRect();
+
+    if (!filtro || !titulo) return;
+
+    // En el celular pone el filtro debajo del título y centrado
+    if (window.innerWidth <= 850) {
         const rectTitulo = titulo.getBoundingClientRect();
-        
-        const centroRetrato = rectRetrato.left + (rectRetrato.width / 2);
-        filtro.style.left = (centroRetrato - (filtro.offsetWidth / 2)) + "px";
-        filtro.style.top = (rectTitulo.top + 10) + "px"; 
-        filtro.style.opacity = "1"; 
+
+        filtro.style.left = "50%";
+        filtro.style.top = (window.scrollY + rectTitulo.bottom + 10) + "px";
+        filtro.style.opacity = "1";
+
+        return;
     }
+
+    // En desktop: mantener tu lógica original, pero con scroll corregido
+    if (!retrato) return;
+
+    const rectRetrato = retrato.getBoundingClientRect();
+    const rectTitulo = titulo.getBoundingClientRect();
+
+    const centroRetrato = rectRetrato.left + window.scrollX + (rectRetrato.width / 2);
+
+    filtro.style.left = (centroRetrato - (filtro.offsetWidth / 2)) + "px";
+    filtro.style.top = (window.scrollY + rectTitulo.top + 10) + "px";
+    filtro.style.opacity = "1";
 }
 
 window.addEventListener('load', () => {
+    // Verificar si había alguien logueado anteriormente
+    const ultimoUser = localStorage.getItem("DbdRandom_UltimoUsuario");
+    if (ultimoUser) {
+        usuarioActivo = ultimoUser;
+        cargarProgresoDesdeStorage();
+        actualizarInterfazUsuario();
+    }
+    
+    posicionarFiltroFinal();
     // 2. DIBUJO: Ahora que los Arrays están actualizados, pintamos la interfaz
     posicionarFiltroFinal();
 
@@ -2299,3 +2395,35 @@ if(ayudaMenu) {
 });
 
 window.addEventListener('resize', posicionarFiltroFinal);
+
+//COnvierte Arrays de objetos
+function guardarProgresoEnStorage() {
+    if (!usuarioActivo) return; // Modo invitado no guarda
+
+    const datosAGuardar = {
+        survivors: Sobrevivientes,
+        killers: Asesinos,
+        perksSurv: PerksUniversales,
+        perksKill: PerksUniversalesAsesino
+    };
+
+    localStorage.setItem("DbdData_" + usuarioActivo, JSON.stringify(datosAGuardar));
+}
+
+function cargarProgresoDesdeStorage() {
+    if (!usuarioActivo) return;
+
+    const datosRaw = localStorage.getItem("DbdData_" + usuarioActivo);
+    if (datosRaw) {
+        const datos = JSON.parse(datosRaw);
+        
+        // Reemplazamos los arrays actuales con los guardados
+        Sobrevivientes.splice(0, Sobrevivientes.length, ...datos.survivors);
+        Asesinos.splice(0, Asesinos.length, ...datos.killers);
+        PerksUniversales.splice(0, PerksUniversales.length, ...datos.perksSurv);
+        PerksUniversalesAsesino.splice(0, PerksUniversalesAsesino.length, ...datos.perksKill);
+        
+        CargarMenu();
+        RevisarEstadoSwitch();
+    }
+}

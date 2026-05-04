@@ -124,5 +124,30 @@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&#BG#@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 -->
+<div id="SeccionUsuario" style="position: fixed; bottom: 80px; left: 20px; z-index: 99; display: flex; align-items: center; gap: 15px;">
+    <div id="BtnUsuario" onclick="mostrarModal()" style="background: rgba(0,0,0,0.7); border: 1px solid #555; padding: 10px 20px; border-radius: 5px; cursor: pointer; color: white; font-family: sans-serif; display: flex; align-items: center; gap: 10px; transition: 0.3s;">
+        <span id="IconoEstado" style="width: 12px; height: 12px; background: #888; border-radius: 50%;"></span>
+        <span id="NombreMostrado">Invitado</span>
+    </div>
+</div>
+
+<div id="ModalLogin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;">
+    <div style="background: #1a1a1a; padding: 30px; border: 2px solid #9c27b0; border-radius: 10px; width: 300px; text-align: center; color: white; font-family: sans-serif;">
+        <h2 id="TituloModal">Account</h2>
+        <input type="text" id="userInput" placeholder="User" style="width: 90%; padding: 10px; margin-bottom: 10px; background: #333; border: 1px solid #555; color: white;">
+        <input type="password" id="passInput" placeholder="Password" style="width: 90%; padding: 10px; margin-bottom: 20px; background: #333; border: 1px solid #555; color: white;">
+        
+        <div id="LoginAcciones" style="display: flex; flex-direction: column; gap: 10px;">
+            <button onclick="procesarLogin()" class="btn-estilo-dbd" style="width: 100%; padding: 10px;">Login / Register</button>
+            <button onclick="cerrarModal()" style="background: none; border: none; color: #888; cursor: pointer;">Cancel</button>
+        </div>
+        
+        <div id="LogoutAcciones" style="display: none; flex-direction: column; gap: 10px;">
+            <button onclick="procesarLogout()" class="btn-estilo-dbd" style="width: 100%; padding: 10px; background-color: #f44336;">Logout</button>
+            <button onclick="cerrarModal()" style="background: none; border: none; color: #888; cursor: pointer;">Close</button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

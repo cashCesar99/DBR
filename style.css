@@ -243,10 +243,9 @@ html, body {
     .carta-perk { width: 130px; height: 130px; }
 
     #ContenedorFiltro {
-        top: 70px;
         left: 50%;
         transform: translateX(-50%) scale(0.8);
-        opacity: 1; /* Aquí quitamos el !important usando especificidad */
+        opacity: 1;
     }
 }
 
