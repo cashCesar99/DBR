@@ -105,7 +105,7 @@ html, body {
     top: 0; left: 0; width: 100%; 
     min-height: 100vh;
     display: flex; flex-direction: column; justify-content: center; align-items: center; 
-    z-index: 10; pointer-events: none; 
+    z-index: 10; pointer-events: auto; 
 }
 
 .titulo-principal {
@@ -122,7 +122,7 @@ html, body {
 
 .santuario-wrapper {
     position: absolute; left: 5%; top: 50%; transform: translateY(-50%); 
-    display: flex; flex-direction: column; align-items: center; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; z-index: 99;
 }
 
 .spin-wrapper {
@@ -140,7 +140,7 @@ html, body {
     padding: 12px;
     border-radius: 5px;
     max-width: 250px;
-    z-index: 9999;
+    z-index: 110;
     display: none;
     pointer-events: none;
     font-family: sans-serif;
@@ -220,27 +220,76 @@ html, body {
 
 .btn-morado:hover { background-color: #9c27b0; border-color: #ba68c8; }
 
+/* --- ESTILO BASE PARA EL BOTÓN DE USUARIO --- */
+#SeccionUsuario {
+    cursor: pointer;
+    z-index: 90; /* Por debajo del menú lateral que tiene 100 */
+    pointer-events: auto; /*A segura que reciba clics */
+}
+
+#BtnUsuario {
+    background: rgba(0,0,0,0.7);
+    border: 1px solid #555;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+#IconoEstado {
+    width: 12px;
+    height: 12px;
+    background: #888;
+    border-radius: 50%;
+}
+
+/* --- COMPORTAMIENTO EN PC (Pantallas grandes) --- */
+@media (min-width: 851px) {
+    #SeccionUsuario {
+        position: fixed; /* Lo clava en la esquina de la pantalla */
+        bottom: 80px;
+        left: 20px;
+    }
+}
+
 /* --- 9. RESPONSIVE (MÓVIL) --- */
 @media (max-width: 850px) {
     .menu-lateral { width: 100%; }
     
-    .contenedor-principal { justify-content: flex-start; padding-top: 320px; }
-    
-    .titulo-principal { font-size: 36px; }
+    .contenedor-principal .btn-estilo-dbd {
+        position: absolute;
+        bottom:70px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8); /* Lo centra y lo hace un poco más pequeño */
+        z-index: 10;
+    }
+    #SeccionUsuario {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+    }
+    .titulo-principal { font-size: 29px; }
     .btn-hamburguesa { top: 60px; }
     
     .santuario-wrapper { 
-        top: 180px; left: 2%; 
+        top: 150px; left: 2%; 
         transform: scale(0.7); transform-origin: top left; 
     }
     
     .spin-wrapper { 
-        top: 170px; right: 2%; 
+        top: 150px; right: 2%; 
         transform: scale(0.6); transform-origin: top right; z-index: 20; 
+        transform: scale(0.45) !important;
+        transform-origin: top right;
     }
     
-    .centro-wrapper { width: 300px; height: 300px; margin: 0; }
-    .carta-perk { width: 130px; height: 130px; }
+    .centro-wrapper { top: 50px; width: 230px; height: 230px; margin: 0; }
+    .carta-perk { width: 100px; height: 100px; }
 
     #ContenedorFiltro {
         left: 50%;
@@ -259,4 +308,15 @@ html, body {
 /* Colores Dinámicos */
 .distintivo-asesino {
     border-bottom-color: #f44336 !important; 
+}
+
+/* Animación de destello y desvanecimiento */
+.efecto-shuffle {
+    animation: flashFade 0.5s ease-in-out;
+}
+
+@keyframes flashFade {
+    0% { opacity: 1; filter: brightness(1); }
+    50% { opacity: 0; filter: brightness(3); }
+    100% { opacity: 1; filter: brightness(1); }
 }

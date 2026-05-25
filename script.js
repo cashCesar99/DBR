@@ -544,7 +544,7 @@ const Sobrevivientes = [
                 imagen: "Resources/Images/Perks/Survivor/Jane/Solidarity2.webp", 
                 activa: true,
                 categoria: "SolidarityConflict",
-                descripción: "While injured, healing another survivor without using a med-kit also heals you for a percentage of that healing progression."
+                descripción: "While injured, healing another survivor without using a med-kit also heals you for a 70% of that healing progression."
             }
         ]
     },
@@ -569,7 +569,7 @@ const Sobrevivientes = [
                 Nombre: "Mettle of man", 
                 imagen: "Resources/Images/Perks/Survivor/Ashley/Mettle of man2.webp", 
                 activa: true,
-                descripción: "After taking enough protection hits, the next hit that would put you into the dying state is ignored."
+                descripción: "After taking 3 protection hits, the next hit that would put you into the dying state is ignored."
             }
         ]
     },
@@ -614,7 +614,7 @@ const Sobrevivientes = [
                 Nombre: "Fixated", 
                 imagen: "Resources/Images/Perks/Survivor/Nancy/Fixated2.webp", 
                 activa: true,
-                descripción: "You can see your own scratch marks and walk 20% faster while uninjured."
+                descripción: "You can see your own scratch marks and walk 20% faster."
             },
             { 
                 Nombre: "Inner Strenght", 
@@ -735,7 +735,7 @@ const Sobrevivientes = [
                 Nombre: "Appraisal", 
                 imagen: "Resources/Images/Perks/Survivor/Élodie/Appraisal2.webp", 
                 activa: true,
-                descripción: "Start with tokens. You can consume a token to search an already opened chest for an extra item."
+                descripción: "Start with 4 tokens. You can consume a token to search an already opened chest for an extra item."
             },
             { 
                 Nombre: "Deception", 
@@ -760,13 +760,13 @@ const Sobrevivientes = [
                 Nombre: "Fast track", 
                 imagen: "Resources/Images/Perks/Survivor/Yun/Fast track2.webp", 
                 activa: true,
-                descripción: "Whenever another survivor is hooked, you gain tokens. Consume all tokens after hitting a great skill check on a generator for a massive progression bonus."
+                descripción: "Whenever you unhook another Survivor, you earn 1 Token(s), up to 1/2/3. While repairing, whenever you hit a great basic Skill Check, spend all Tokens. For each Token spent, the Generator gains 5% permanent progress."
             },
             { 
                 Nombre: "self preservation", 
                 imagen: "Resources/Images/Perks/Survivor/Yun/Self preservation2.webp", 
                 activa: true,
-                descripción: "Whenever another survivor is hit by a basic or special attack near you, your scratch marks, blood pools, and grunts of pain are hidden."
+                descripción: "Whenever another Survivor is hooked, you gain Elusive for 20/25/30s. Elusive: The Killer cannot see your aura and you leave no scratch marks for the duration."
             },
             { 
                 Nombre: "Smash hit", 
@@ -976,7 +976,6 @@ const Sobrevivientes = [
                 Nombre: "Ressurance", 
                 imagen: "Resources/Images/Perks/Survivor/Rebecca/Reassurance.webp", 
                 activa: true,
-                descripción: "When near a hooked survivor, press the active ability button to pause their struggle phase timer for a duration."
             }
         ]
     },
@@ -1001,7 +1000,7 @@ const Sobrevivientes = [
                 Nombre: "Quick gambit", 
                 imagen: "Resources/Images/Perks/Survivor/Vittorio/Quick gambit2.webp", 
                 activa: true,
-                descripción: "When you are being chased within range of a generator being repaired, the survivors repairing it get a repair speed boost."
+                descripción: "While chased by the Killer: You see the Auras of other Survivors. Other Survivors repair 3/4/5% faster."
             }
         ]
     },
@@ -1175,13 +1174,14 @@ const Sobrevivientes = [
                 Nombre: "Strength shadow", 
                 imagen: "Resources/Images/Perks/Survivor/Sable/Strength shadows.webp", 
                 activa: true,
-                descripción: "Unlocks the ability to heal yourself at a highly increased speed while in the basement. Doing so reveals the killer's aura."
+                categoria: "Heal",
+                descripción: "While in the Basement: You can heal yourself at 70% speed. Whenever you finish healing, you see the Killer's Aura for 6/8/10s."
             },
             { 
                 Nombre: "Wicked", 
                 imagen: "Resources/Images/Perks/Survivor/Sable/Wicked.webp", 
                 activa: true,
-                descripción: "Your self-unhook attempts in the basement always succeed. Whenever you are unhooked, the killer's aura is revealed to you for a short time."
+                descripción: "While in the Basement, you can unhook yourself. Whenever you are unhooked, you see the Killer's Aura for 16/18/20s."
             }
         ]
     },
@@ -1194,19 +1194,19 @@ const Sobrevivientes = [
                 Nombre: "Bardic Inspiration", 
                 imagen: "Resources/Images/Perks/Survivor/Aestri/Bardic inspiration.webp", 
                 activa: true,
-                descripción: "Perform a song to inspire nearby allies. Roll a d20 to grant them a buff that adds extra progression to their generator skill checks."
+                descripción: "While idle, use Active Ability Button 1 to perform, empowering all Survivors within 16m for up to 15s. While you are performing, other Survivors will see your Aura. Roll a d20: 1 | You scream, but nothing happens. 2-10 | Basic Skill Checks give +1% progress. 11-19 | Basic Skill Checks give +2% progress. 20 | Basic Skill Checks give +3% progress. If you complete the performance, this effect ends after 90s. Cooldown: 110/100/90s."
             },
             { 
                 Nombre: "Mirrored Illusion", 
                 imagen: "Resources/Images/Perks/Survivor/Aestri/Mirrored illusion.webp", 
                 activa: true,
-                descripción: "After repairing a generator for a set duration, spawn a static illusion of yourself working on a generator, chest, or totem."
+                descripción: "After repairing 20% of Generators, while next to a Chest, Exit Gate Switch, Generator, or Totem, use Active Ability Button 2 to create a static illusion for 40/50/60s."
             },
             { 
                 Nombre: "Still sight", 
                 imagen: "Resources/Images/Perks/Survivor/Aestri/Still sight.webp", 
                 activa: true,
-                descripción: "Standing completely still for a few seconds reveals the auras of the killer and all generators within a medium range."
+                descripción: "After being idle for 4/3/2s, within 24m, until you start moving: You see the Killer's Aura. You see the Auras of Chests. You see the Auras of Generators."
             }
         ]
     },
@@ -1225,13 +1225,14 @@ const Sobrevivientes = [
                 Nombre: "Handened", 
                 imagen: "Resources/Images/Perks/Survivor/Lara/Handened.webp", 
                 activa: true,
-                descripción: "When you would normally scream, you instead do not scream and the killer's aura is revealed to you."
+                categoria: "Scream",
+                descripción: "When you have blessed or cleansed a Totem and unlocked a Chest, whenever you would scream, you see the Killer's Aura for 3/4/5s instead."
             },
             { 
                 Nombre: "Specialist", 
                 imagen: "Resources/Images/Perks/Survivor/Lara/Specialist.webp", 
                 activa: true,
-                descripción: "Opening chests or cleansing totems grants tokens. Hitting great skill checks on generators consumes tokens to permanently reduce the generator's maximum required charges."
+                descripción: "Whenever you rummage or unlock a Chest, you earn 1 Token, up to 6. While repairing a Generator, whenever you hit a great basic Skill Check, spend all Tokens. For each Token spent, the Generator gains 2/3/4% permanent progress."
             }
         ]
     },
@@ -1256,7 +1257,7 @@ const Sobrevivientes = [
                 Nombre: "Moment of glory", 
                 imagen: "Resources/Images/Perks/Survivor/Trevor/Moment of glory.webp", 
                 activa: true,
-                descripción: "After opening chests, this perk activates. The next time you take damage, you will automatically heal one health state after a delay if you avoid going down."
+                descripción: "After opening 2 chests, this perk activates. The next time you take damage, you will automatically heal one health state after a delay if you avoid going down."
             }
         ]   
     },
@@ -1270,19 +1271,19 @@ const Sobrevivientes = [
                 imagen: "Resources/Images/Perks/Survivor/Taurie/Clean break.webp", 
                 activa: true,
                 categoria: "SolidarityConflict",
-                descripción: "After finishing a heal or unhooking yourself, you break into a quick sprint and leave no scratch marks for a short time."
+                descripción: "Whenever you finish healing another Survivor, while being healed by another Survivor, use Active Ability Button 1 to gain Broken. After 80/70/60s, if you are not downed, you are instantly healed."
             },
             { 
                 Nombre: "Invocation treacherous crows", 
                 imagen: "Resources/Images/Perks/Survivor/Taurie/invocation treacherous crows.webp", 
                 activa: true,
-                descripción: "Perform an invocation to startle crows map-wide, revealing the killer's aura, at the cost of permanent vulnerability."
+                descripción: "While in the Basement next to the circle, use Active Ability Button 2 to invoke. While invoking, other Survivors see your Aura and can join your Invocation. When the Invocation is completed: Whenever the Killer scares a Crow while a Survivor is in their Terror Radius, all Survivors see the Killer's Aura for 1/1.5/2s. You become injured. You gain Broken. Each Invocation can only be completed once per trial."
             },
             { 
                 Nombre: "Shoulder the  burden", 
                 imagen: "Resources/Images/Perks/Survivor/Taurie/Shoulder the burden.webp", 
                 activa: true,
-                descripción: "Take on the negative status effects of an injured survivor to grant them a burst of speed and remove their afflictions."
+                descripción: "Once per trial, while you do not have 2 Hook States and are next to a hooked Survivor, use Active Ability Button 2 to unhook them: They lose 1 Hook State. You gain 1 Hook State. You scream. You gain Exposed for 60/50/40s."
             }
         ]
     },
@@ -1295,20 +1296,19 @@ const Sobrevivientes = [
                 Nombre: "Do no harm", 
                 imagen: "Resources/Images/Perks/Survivor/Orela/Do no harm.webp", 
                 activa: true,
-                categoria: "Exhaustion",
-                descripción: "Healing survivors without a med-kit is significantly faster but causes you to suffer from Exhaustion."
+                descripción: "While healing another Survivor: For each Hook State they have, you heal 30/40/50% faster. Whenever you hit a great basic Skill Check, you gain 3% more progress."
             },
             { 
                 Nombre: "Duty of care", 
                 imagen: "Resources/Images/Perks/Survivor/Orela/Duty of care.webp", 
                 activa: true,
-                descripción: "Taking a protection hit grants you and the rescued survivor a temporary speed boost and hides your auras."
+                descripción: "While healthy, whenever you take a protection hit, other Survivors within 12m gain 25% Haste for 4/5/6s."
             },
             { 
                 Nombre: "Rapid response", 
                 imagen: "Resources/Images/Perks/Survivor/Orela/Rapid response.webp", 
                 activa: true,
-                descripción: "You gain a movement speed bonus when running directly towards a hooked survivor."
+                descripción: "Whenever you fast-exit a Locker, you gain Exhausted for 30/25/20s. Whenever you gain Exhausted, you see the Killer's Aura for 2s."
             }
         ]
     },
@@ -1321,19 +1321,19 @@ const Sobrevivientes = [
                 Nombre: "Conviction", 
                 imagen: "Resources/Images/Perks/Survivor/Michonne/Conviction.webp", 
                 activa: true,
-                descripción: "Generator regression from killer kicks is heavily reduced if you were working on the generator recently."
+                descripción: "After you finish healing 1 other Survivor, while downed with at least 25% recovery, use Active Ability Button 1 to recover instantly. You gain Broken, then, after 20/25/30s, you are downed instantly."
             },
             { 
                 Nombre: "Last stand", 
                 imagen: "Resources/Images/Perks/Survivor/Michonne/Last stand.webp", 
                 activa: true,
-                descripción: "You recover significantly faster while in the dying state and have a small chance to break free from the killer's grasp instantly."
+                descripción: "After hiding for 120/105/90s within the Killer's Terror Radius, when you fast-vault, once per trial, stun the Killer for 3s if they are within 2.5m."
             },
             { 
                 Nombre: "Teamwork throw down", 
                 imagen: "Resources/Images/Perks/Survivor/Michonne/Temwork throw down.webp", 
                 activa: true,
-                descripción: "Pallet drop animations are faster and stun durations are increased when another survivor is nearby."
+                descripción: "Whenever you blind or Pallet-stun the Killer, for 6/8/10s, other injured Survivors within 24m: Gain Endurance. See the Killer's Aura."
             }
         ]
     },
@@ -1346,19 +1346,19 @@ const Sobrevivientes = [
                 Nombre: "Apocalyptic ingenuity", 
                 imagen: "Resources/Images/Perks/Survivor/Rick/Apocalyptic ingenuity.webp", 
                 activa: true,
-                descripción: "Scavenging opened chests yields spare parts that can be applied to generators for an instant burst of progress."
+                descripción: "After you rummage or unlock 2 Chests, while next to a Broken Pallet, use Active Ability Button 1 for 4s to create a Fragile Pallet. Within 24/28/32m, you see the Auras of Broken Pallets."
             },
             { 
                 Nombre: "Come and get me", 
                 imagen: "Resources/Images/Perks/Survivor/Rick/Come and get me.webp", 
                 activa: true,
-                descripción: "Willingly reveal your aura to the killer to grant all other survivors a massive repair speed boost for a short duration."
+                descripción: "Whenever you unhook a Survivor, while crouched and idle, use Active Ability Button 1 to make injured and downed Survivors within 24m: Leave no Pools of Blood for 10/12.5/15s. Leave no Scratch Marks for 10/12.5/15s. You scream, then the Killer sees your Aura for 5s."
             },
             { 
                 Nombre: "Teamwork toughen up", 
                 imagen: "Resources/Images/Perks/Survivor/Rick/Teamwork toughen up.webp", 
                 activa: true,
-                descripción: "Healing an ally grants both of you temporary immunity to the Hemorrhage and Mangled status effects as long as you stay close."
+                descripción: "Whenever another Survivor within 24m of you blinds or Pallet-stuns the Killer, for 20/25/30s: You make no Grunts of Pain. You leave no Pools of Blood. You leave no Scratch Marks."
             }
         ]   
     },
@@ -1383,19 +1383,19 @@ const Sobrevivientes = [
                 Nombre: "Ghost notes", 
                 imagen: "Resources/Images/Perks/Survivor/Vee/Ghost notes.webp", 
                 activa: true,
-                descripción: "Performing rushed actions while outside the killer's terror radius creates no loud noise notifications."
+                descripción: "While you have Exhausted, your Scratch Marks disappear 50% faster. You lose Exhausted 5/7.5/10% faster."
             },
             { 
                 Nombre: "One two trhee four", 
                 imagen: "Resources/Images/Perks/Survivor/Vee/One two three four.webp", 
                 activa: true,
-                descripción: "Hitting 4 good or great skill checks in a row grants a token that speeds up your next healing or repairing action."
+                descripción: "While idle, use Active Ability Button 2 to perform, empowering all Survivors within 16m for up to 15s. While you are performing, other Survivors will see your Aura. You get special Skill Checks during that time: while healing or repairing, basic Skill Checks are 20% more likely to appear. If you complete the performance, the effect ends after 90s. Cooldown: 110/100/90s."
             },
             { 
                 Nombre: "road life", 
                 imagen: "Resources/Images/Perks/Survivor/Vee/Road life.webp", 
                 activa: true,
-                descripción: "Walking or crouching near the very edges of the map increases your movement speed significantly."
+                descripción: "While injured, not Broken and repairing a Generator: Whenever you hit a basic great Skill Check, you earn 1 Token. Whenever you miss a basic Skill Check, you lose 1 token. When you have 6/5/4 Tokens, spend all Tokens to heal 100% faster until you stop healing."
             }
         ]
     },
@@ -1408,19 +1408,19 @@ const Sobrevivientes = [
                 Nombre: "Bada bada boom", 
                 imagen: "Resources/Images/Perks/Survivor/Dustin/Bada bada boom.webp", 
                 activa: true,
-                descripción: "Sabotaging a hook rigs it to explode, blinding the killer if they attempt to hook someone on it."
+                descripción: "After repairing 20% of Generators, while next to a Window, use Active Ability Button 2 to trap it for 40/50/60s. All Survivors see that Window's Aura for that time. When the Killer vaults that Window, the trap explodes and they gain 50% Hindered for 4s."
             },
             { 
                 Nombre: "Change of plan", 
                 imagen: "Resources/Images/Perks/Survivor/Dustin/Change of plan.webp", 
                 activa: true,
-                descripción: "If the killer closes the hatch, the aura of the exit gate switches are revealed and you open them significantly faster."
+                descripción: "While hiding in a Locker and holding a non-event Toolbox, use Active Ability Button 2 and spend 1 Token to transform your Toolbox and add-ons into a Med-Kit of the same rarity with 80/90/100% Charges and random add-ons of the same rarity."
             },
             { 
                 Nombre: "Teamwork full circuit", 
                 imagen: "Resources/Images/Perks/Survivor/Dustin/Teamwork full circuit.webp", 
                 activa: true,
-                descripción: "Repairing a generator with an ally prevents it from exploding even if a skill check is failed, as long as you stay near each other."
+                descripción: "For each other Survivor repairing a Generator with you, good basic Skill Check zones are 15/20/25% bigger. While repairing with at least 1 other Survivor, you repair 5% faster."
             }
         ]
     },
@@ -1439,13 +1439,13 @@ const Sobrevivientes = [
                 Nombre: "Teamwork soft spoken", 
                 imagen: "Resources/Images/Perks/Survivor/Eleven/Teamwork soft spoken.webp", 
                 activa: true,
-                descripción: "Healing or repairing with another survivor reduces the audibility of those actions to 0 meters."
+                descripción: "For each other Survivor repairing a Generator with you, the range of Generator repair noises is 15/20/25% smaller. While repairing with at least 1 other Survivor, you repair 5% faster."
             },
             { 
                 Nombre: "We see you", 
                 imagen: "Resources/Images/Perks/Survivor/Eleven/We see you.webp", 
                 activa: true,
-                descripción: "If a survivor's aura is revealed to you, the killer's aura is also briefly revealed."
+                descripción: "Whenever the Killer sees your Aura, you earn 1 Token. Cooldown: 10s. When you have 4 Tokens, spend them all. Then, all Survivors see the Killer's Aura for 10/12.5/15s."
             }
         ]
     },
@@ -1458,19 +1458,19 @@ const Sobrevivientes = [
                 Nombre: "A place for us", 
                 imagen: "Resources/Images/Perks/Survivor/Kwon Tae-Young/a-place-for-us.webp", 
                 activa: true,
-                descripción: "Action speeds are increased when inside main buildings or the basement."
+                descripción: "While healing another Survivor, you both gain Elusive. Whenever you finish healing the Obsession, they gain Elusive for 20/25/30s. When the trial starts, you are less likely to be the Obsession."
             },
             { 
                 Nombre: "Five moves ahead", 
                 imagen: "Resources/Images/Perks/Survivor/Kwon Tae-Young/five-moves-ahead.webp", 
                 activa: true,
-                descripción: "You are alerted when the killer reads your aura, and your aura is projected in a false location."
+                descripción: "While you are in the Killer's Terror Radius or chased by the Killer: You see the Auras of the 5 closest Pallets and Windows. After you drop a Pallet, you start moving 50% earlier. Whenever you drop a Pallet, cooldown: 40/35/30s."
             },
             { 
                 Nombre: "Flow state", 
                 imagen: "Resources/Images/Perks/Survivor/Kwon Tae-Young/flow-state.webp", 
                 activa: true,
-                descripción: "Chaining multiple fast vaults in a chase gives you a small, stacking movement speed bonus."
+                descripción: "Whenever a generator is completed, earn 1 Token, up to 5. For each Token: You bless and cleanse 8/9/10% faster. You heal 8/9/10% faster. You unhook Survivors 8/9/10% faster."
             }
         ]
     },
@@ -1479,9 +1479,9 @@ const Sobrevivientes = [
         Retrato: "",
         PersonajeActivo: true,
         Perks: [
-            { Nombre: "", imagen: "", activa: true },
-            { Nombre: "", imagen: "", activa: true },
-            { Nombre: "", imagen: "", activa: true },
+            { Nombre: "", imagen: "", activa: true, descripcion: "" },
+            { Nombre: "", imagen: "", activa: true, descripcion: "" },
+            { Nombre: "", imagen: "", activa: true, descripcion: "" },
         ]
     },
 ];
@@ -1917,9 +1917,9 @@ const Asesinos = [
         Retrato: "",
         PersonajeActivo: true,
         Perks: [
-            { Nombre: "", imagen: "", activa: true },
-            { Nombre: "", imagen: "", activa: true },
-            { Nombre: "", imagen: "", activa: true },
+            { Nombre: "", imagen: "", activa: true, descripcion: "" },
+            { Nombre: "", imagen: "", activa: true, descripcion: "" },
+            { Nombre: "", imagen: "", activa: true, descripcion: "" },
         ]
     },
 ]
@@ -2129,13 +2129,20 @@ function MezclarPerks() {
     const arr = document.getElementById("Arriba");
     const aba = document.getElementById("Abajo");
     const der = document.getElementById("Derecha");
+    const perksUI = [izq, arr, aba, der];
 
+    // 1. Disparar el efecto visual
+    perksUI.forEach(img => {
+        img.classList.remove("efecto-shuffle");
+        void img.offsetWidth; // Reinicio forzado de la animación
+        img.classList.add("efecto-shuffle");
+    });
+
+    // --- Tu lógica de selección (Intacta) ---
     let perksUniversalesAUsar = rolActual === "killer" ? PerksUniversalesAsesino : PerksUniversales;
     let baseDeDatos = rolActual === "killer" ? Asesinos : Sobrevivientes;
-
     let perksDisponibles = [...perksUniversalesAUsar];
 
-    // Recolectar todas las perks activas
     baseDeDatos.forEach((personaje) => {
         if (personaje.Nombre === "" || personaje.SinPerks === true) return;
         personaje.Perks.forEach((perk) => {
@@ -2145,84 +2152,58 @@ function MezclarPerks() {
         });
     });
 
-    // Revolvemos TODA la lista disponible primero
     perksDisponibles.sort(() => 0.5 - Math.random());
-
-    // Revisa si el switch del Smart Filter está encendido
     const filtroActivado = document.getElementById("switchFiltro") ? document.getElementById("switchFiltro").checked : false;
 
     let perksElegidas = [];
-    let categoriasElegidas = []; // Aquí guardaremos las categorías que ya salieron para no repetirlas
-    let tieneBroken = false; // Flag especial para No Mither
+    let categoriasElegidas = []; 
+    let tieneBroken = false; 
 
-    // Empezamos a sacar perks de la tómbola revuelta
     for (let i = 0; i < perksDisponibles.length; i++) {
-        if (perksElegidas.length === 4) break; // Ya tenemos las 4, dejamos de buscar
-
+        if (perksElegidas.length === 4) break; 
         let perkCandidata = perksDisponibles[i];
         let aceptarPerk = true;
 
-        // === REGLAS DEL SMART FILTER (SOLO PARA SOBREVIVIENTES) ===
         if (filtroActivado && rolActual === "survivor" && perkCandidata.categoria) {
             const cat = perkCandidata.categoria;
-
-            // 1. Evitar más de un Agotamiento (Exhaustion)
-            if (cat === "Exhaustion" && categoriasElegidas.includes("Exhaustion")) {
-                aceptarPerk = false;
-            }
-            
-            // 2. Evitar que "Solidarity" y "Clean break" salgan juntas
-            if (cat === "SolidarityConflict" && categoriasElegidas.includes("SolidarityConflict")) {
-                aceptarPerk = false;
-            }
-
-            // 3. Choque de Gritos (Calm Spirit te calla, Scene Partner te obliga a gritar)
-            if (cat === "Scream" && categoriasElegidas.includes("Scream")) {
-                aceptarPerk = false;
-            }
-
-            // 4. Choque de No Mither (Roto/Broken) vs Perks de Curación
-            // Si sale No Mither, no pueden salir perks de curación.
+            if (cat === "Exhaustion" && categoriasElegidas.includes("Exhaustion")) aceptarPerk = false;
+            if (cat === "SolidarityConflict" && categoriasElegidas.includes("SolidarityConflict")) aceptarPerk = false;
+            if (cat === "Scream" && categoriasElegidas.includes("Scream")) aceptarPerk = false;
             if (cat === "Broken") {
-                if (categoriasElegidas.includes("Heal")) {
-                    aceptarPerk = false; // Si ya salió una de curar, rechaza No Mither
-                } else {
-                    tieneBroken = true; // Marca que tienes Broken
-                }
+                if (categoriasElegidas.includes("Heal")) aceptarPerk = false;
+                else tieneBroken = true;
             }
-            
-            // Si es una de curación, y ya tienes No Mither, se rechaza
-            if (cat === "Heal" && tieneBroken) {
-                aceptarPerk = false;
-            }
+            if (cat === "Heal" && tieneBroken) aceptarPerk = false;
         }
 
-        // Si pasó el filtro (o si el filtro está apagado), la guardamos
         if (aceptarPerk) {
             perksElegidas.push(perkCandidata);
-            if (perkCandidata.categoria) {
-                categoriasElegidas.push(perkCandidata.categoria);
-            }
+            if (perkCandidata.categoria) categoriasElegidas.push(perkCandidata.categoria);
         }
     }
 
-    // Por si no había suficientes perks activas para juntar 4 (evita errores visuales)
     while (perksElegidas.length < 4) {
-        perksElegidas.push({ imagen: "./Resources/Images/Perks/Random/Random.png", Nombre: "Faltan Perks", descripción: "Activa más personajes o apaga el filtro." });
+        perksElegidas.push({ imagen: "./Resources/Images/Perks/Random/Random.png", Nombre: "Faltan Perks", descripción: "Activa más personajes." });
     }
+    // ----------------------------------------
 
-    // Asignamos las imágenes al rombo
-    izq.src = perksElegidas[0].imagen;
-    arr.src = perksElegidas[1].imagen;
-    aba.src = perksElegidas[2].imagen;
-    der.src = perksElegidas[3].imagen;
+    // 2. Cambio de imágenes a mitad de la animación
+    setTimeout(() => {
+        izq.src = perksElegidas[0].imagen;
+        arr.src = perksElegidas[1].imagen;
+        aba.src = perksElegidas[2].imagen;
+        der.src = perksElegidas[3].imagen;
 
-    // Asignamos los textos para las descripciones flotantes
-    console.log("Intentando asignar imágenes...");
-    AsignarDatosTooltip(izq, perksElegidas[0]);
-    AsignarDatosTooltip(arr, perksElegidas[1]);
-    AsignarDatosTooltip(aba, perksElegidas[2]);
-    AsignarDatosTooltip(der, perksElegidas[3]);
+        AsignarDatosTooltip(izq, perksElegidas[0]);
+        AsignarDatosTooltip(arr, perksElegidas[1]);
+        AsignarDatosTooltip(aba, perksElegidas[2]);
+        AsignarDatosTooltip(der, perksElegidas[3]);
+    }, 200);
+
+    // 3. Limpiar clase para poder repetir
+    setTimeout(() => {
+        perksUI.forEach(img => img.classList.remove("efecto-shuffle"));
+    }, 400);
 }
 
 function AsignarDatosTooltip(elementoHTML, datosPerk) {
