@@ -96,10 +96,15 @@
             <span style="font-family: cursive; font-size: 30px; color: white;">Shuffle</span>
         </div>
 
-        <div id="SeccionUsuario" onclick="mostrarModal()">
-            <div id="BtnUsuario">
-                <span id="IconoEstado"></span>
-                <span id="NombreMostrado">Invitado</span>
+        <div id="ContenedorBotonesInferior">
+            <div id="BtnAvisos" onclick="abrirModalAvisos()">
+                <span>&#9993;</span> </div>
+
+            <div id="SeccionUsuario" onclick="mostrarModal()">
+                <div id="BtnUsuario">
+                    <span id="IconoEstado"></span>
+                    <span id="NombreMostrado">Invitado</span>
+                </div>
             </div>
         </div>
         
@@ -147,6 +152,21 @@
             <button onclick="procesarLogout()" class="btn-estilo-dbd" style="width: 100%; padding: 10px; background-color: #f44336;">Logout</button>
             <button onclick="cerrarModal()" style="background: none; border: none; color: #888; cursor: pointer;">Close</button>
         </div>
+    </div>
+</div>
+
+<div id="ModalAvisos" class="modal-fondos-avisos" style="display: none;">
+    <div class="modal-contenido-avisos">
+        <h2>Important Notices</h2>
+        <div class="cuerpo-avisos-scroll">
+            <ul>
+                <li>La página aún está en desarrollo activo.</li>
+                <li>Si notas un bug o conflicto, favor de notificarme en <strong>Pagina de facebook</strong>.</li>
+                <li>Algunas perks del inventario pueden tener descripciones o datos pendientes de actualizar.</li>
+                <li>Nueva animación de destello agregada con éxito al presionar Shuffle.</li>
+            </ul>
+        </div>
+        <button onclick="cerrarModalAvisos()" class="btn-estilo-dbd" style="width: 100%; margin-top: 15px; padding: 10px;">Close</button>
     </div>
 </div>
 

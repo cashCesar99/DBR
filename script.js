@@ -2408,3 +2408,21 @@ function cargarProgresoDesdeStorage() {
         RevisarEstadoSwitch();
     }
 }
+
+// Funciones para el Modal de Avisos Informativos
+function abrirModalAvisos() {
+    document.getElementById("ModalAvisos").style.display = "flex";
+}
+
+function cerrarModalAvisos() {
+    document.getElementById("ModalAvisos").style.display = "none";
+}
+
+// Evento global para cerrar ventanas haciendo clic afuera en el fondo oscuro
+window.addEventListener('click', (e) => {
+    const modalAvisos = document.getElementById("ModalAvisos");
+    const modalLogin = document.getElementById("ModalLogin");
+    
+    if (e.target === modalAvisos) cerrarModalAvisos();
+    if (e.target === modalLogin) cerrarModal();
+});

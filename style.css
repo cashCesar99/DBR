@@ -247,15 +247,6 @@ html, body {
     border-radius: 50%;
 }
 
-/* --- COMPORTAMIENTO EN PC (Pantallas grandes) --- */
-@media (min-width: 851px) {
-    #SeccionUsuario {
-        position: fixed; /* Lo clava en la esquina de la pantalla */
-        bottom: 80px;
-        left: 20px;
-    }
-}
-
 /* --- 9. RESPONSIVE (MÓVIL) --- */
 @media (max-width: 850px) {
     .menu-lateral { width: 100%; }
@@ -319,4 +310,110 @@ html, body {
     0% { opacity: 1; filter: brightness(1); }
     50% { opacity: 0; filter: brightness(3); }
     100% { opacity: 1; filter: brightness(1); }
+}
+
+/* --- CONTENEDOR GENERAL DE LOS BOTONES --- */
+#ContenedorBotonesInferior {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Separación horizontal entre botones */
+    z-index: 150; /* Por encima de la niebla y otros wrappers */
+}
+
+/* --- ESTILO DEL BOTÓN CUADRADO DE AVISOS --- */
+#BtnAvisos {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #555;
+    width: 42px;  /* Ajuste exacto para emparejar la altura del botón de invitado */
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    font-size: 22px;
+    transition: 0.3s ease;
+    box-sizing: border-box;
+}
+
+#BtnAvisos:hover {
+    background: #222;
+    border-color: #9c27b0;
+    transform: scale(1.05);
+}
+
+/* --- ESTILOS DEL MODAL (POP-UP) EN EL CENTRO --- */
+.modal-fondos-avisos {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+
+.modal-contenido-avisos {
+    background: #1a1a1a;
+    padding: 25px;
+    border: 2px solid #555;
+    border-radius: 10px;
+    width: 340px;
+    max-height: 80vh; /* No permite que se desborde de la pantalla */
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.modal-contenido-avisos h2 {
+    margin-top: 0;
+    color: #ffeb3b;
+    font-family: cursive;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+/* Caja interna con scroll para soportar textos infinitos */
+.cuerpo-avisos-scroll {
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.cuerpo-avisos-scroll ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.cuerpo-avisos-scroll li {
+    margin-bottom: 12px;
+    line-height: 1.5;
+    font-size: 14px;
+    color: #ddd;
+}
+
+/* --- AJUSTE RESPONSIVE PARA CELULARES --- */
+@media (max-width: 850px) {
+    /* Eliminamos el absolute individual de SeccionUsuario que tenías en la línea 193 */
+    .menu-lateral ~ .contenedor-principal #SeccionUsuario {
+        position: static !important;
+        transform: none !important;
+    }
+
+    /* Forzamos al contenedor grupal a centrarse abajo en móviles */
+    #ContenedorBotonesInferior {
+        position: absolute !important;
+        bottom: 10px !important;
+        left: 50% !important;
+        transform: translateX(-50%) scale(0.85) !important;
+        width: max-content;
+    }
 }
