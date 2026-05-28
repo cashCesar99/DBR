@@ -1913,6 +1913,18 @@ const Asesinos = [
         ]
     },
     {
+        Nombre: "Slenderman",
+        Retrato: "Resources/Images/Perks/Killer/Slenderman/killer-idea-slender-man-v0-lm6jemduf1tc1.webp",
+        PersonajeActivo: true,
+        SiempreActivo: false,
+        SinPerks: true,
+        Perks: [
+            { Nombre: "", imagen: "", activa: false },
+            { Nombre: "", imagen: "", activa: false },
+            { Nombre: "", imagen: "", activa: false }
+        ]
+    },
+    {
         Nombre: "",
         Retrato: "",
         PersonajeActivo: true,
@@ -2086,8 +2098,6 @@ CargarMenu();
 RevisarEstadoSwitch();
 
 // Lista de perks universales
-// Lista de perks universales
-// Lista de perks universales de Sobrevivientes
 const PerksUniversales = [
     { Nombre: "Deja vu", imagen: "Resources/Images/Perks/Survivor/Universal/Deja vu.webp", activa: true, descripción: "Reveals the auras of the 3 closest generators to each other and grants a repair speed bonus when working on them." },
     { Nombre: "Hope", imagen: "Resources/Images/Perks/Survivor/Universal/Hope.webp", activa: true, descripción: "As soon as the exit gates are powered, you gain a permanent 7% Haste status effect." },
@@ -2099,12 +2109,12 @@ const PerksUniversales = [
     { Nombre: "Resilience", imagen: "Resources/Images/Perks/Survivor/Universal/Resilience.webp", activa: true, descripción: "Grants a 9% speed bonus to repairing, healing, sabotaging, unhooking, vaulting, cleansing, and opening exit gates while injured." },
     { Nombre: "Slippery meat", imagen: "Resources/Images/Perks/Survivor/Universal/Slippery meat.webp", activa: true, descripción: "Grants additional self-unhook attempts and increases the chance to free yourself from Bear Traps." },
     { Nombre: "Small game", imagen: "Resources/Images/Perks/Survivor/Universal/Small game.webp", activa: true, descripción: "You receive an auditory warning when looking in the direction of killer traps or totems." },
-    { Nombre: "Spine chill", imagen: "Resources/Images/Perks/Survivor/Universal/Spine chill.webp", activa: true, descripción: "The perk lights up when the killer is looking in your direction and is within range. Increases vault speed slightly." },
+    { Nombre: "Spine chill", imagen: "Resources/Images/Perks/Survivor/Universal/Spine chill.webp", activa: true, descripción: "Gatito tuvo que irse." }, //The perk lights up when the killer is looking in your direction and is within range. Increases vault speed slightly
     { Nombre: "This is not happening", imagen: "Resources/Images/Perks/Survivor/Universal/This is not happening.webp", activa: true, descripción: "The success zones of great skill checks are significantly larger when you are injured." },
     { Nombre: "We'll make it", imagen: "Resources/Images/Perks/Survivor/Universal/Well make it.webp", activa: true, descripción: "For 90 seconds after rescuing a survivor from a hook, your healing speed on others is increased by 100%." }
 ];
 
-// Lista temporal de perks universales de Asesino (las convertí a objetos para que no den error)
+// Lista de perks universales de Asesino
 const PerksUniversalesAsesino = [
     { Nombre: "Bitter Murmur", imagen: "Resources/Images/Perks/Killer/Universal/bitter-murmur.webp", activa: true, descripción: "When a generator is completed, auras of survivors nearby are revealed. When the last is completed, all auras are revealed." },
     { Nombre: "Dark Sense", imagen: "Resources/Images/Perks/Killer/Universal/dark-sense.webp", activa: true, descripción: "Unlocks potential in one's aura-reading ability. When a generator is completed, the Killer's aura is revealed to you." }, // Nota: Dark sense suele ser de sobreviviente, pero le dejo su descripción real.
@@ -2159,26 +2169,58 @@ function MezclarPerks() {
     let categoriasElegidas = []; 
     let tieneBroken = false; 
 
+    // Empezamos a sacar perks de la tómbola revuelta
     for (let i = 0; i < perksDisponibles.length; i++) {
-        if (perksElegidas.length === 4) break; 
+        if (perksElegidas.length === 4) break; // Ya tenemos las 4, dejamos de buscar
+
         let perkCandidata = perksDisponibles[i];
         let aceptarPerk = true;
 
         if (filtroActivado && rolActual === "survivor" && perkCandidata.categoria) {
             const cat = perkCandidata.categoria;
-            if (cat === "Exhaustion" && categoriasElegidas.includes("Exhaustion")) aceptarPerk = false;
-            if (cat === "SolidarityConflict" && categoriasElegidas.includes("SolidarityConflict")) aceptarPerk = false;
-            if (cat === "Scream" && categoriasElegidas.includes("Scream")) aceptarPerk = false;
-            if (cat === "Broken") {
-                if (categoriasElegidas.includes("Heal")) aceptarPerk = false;
-                else tieneBroken = true;
+
+            // 1. Evitar más de un Agotamiento (Exhaustion)
+            if (cat === "Exhaustion" && categoriasElegidas.includes("Exhaustion")) {
+                aceptarPerk = false;
             }
-            if (cat === "Heal" && tieneBroken) aceptarPerk = false;
+            
+            // 2. Evitar que "Solidarity" y "Clean break" salgan juntas
+            if (cat === "SolidarityConflict" && categoriasElegidas.includes("SolidarityConflict")) {
+                aceptarPerk = false;
+            }
+
+            // 3. Choque de Gritos (Calm Spirit te calla, Scene Partner te obliga a gritar)
+            if (cat === "Scream" && categoriasElegidas.includes("Scream")) {
+                aceptarPerk = false;
+            }
+
+            // 4. Choque de No Mither (Roto/Broken) vs Perks de Curación y Overcome
+            if (cat === "Broken") {
+                // Si ya se eligió una de curar O ya se eligió "Overcome", rechaza No Mither
+                if (categoriasElegidas.includes("Heal") || perksElegidas.some(p => p.Nombre === "Overcome")) {
+                    aceptarPerk = false; 
+                } else {
+                    tieneBroken = true; // Marca que tienes Broken
+                }
+            }
+            
+            // Si es una de curación, y ya tienes No Mither, se rechaza
+            if (cat === "Heal" && tieneBroken) {
+                aceptarPerk = false;
+            }
+
+            // NUEVA REGLA 5: Si la perk candidata es "Overcome" pero ya se seleccionó "No Mither" (tieneBroken), se rechaza
+            if (perkCandidata.Nombre === "Overcome" && tieneBroken) {
+                aceptarPerk = false;
+            }
         }
 
+        // Si pasó el filtro (o si el filtro está apagado), la guardamos
         if (aceptarPerk) {
             perksElegidas.push(perkCandidata);
-            if (perkCandidata.categoria) categoriasElegidas.push(perkCandidata.categoria);
+            if (perkCandidata.categoria) {
+                categoriasElegidas.push(perkCandidata.categoria);
+            }
         }
     }
 

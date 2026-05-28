@@ -7,6 +7,7 @@ html, body {
     overflow-x: hidden;
     background-color: black; 
     color: white; 
+    padding-bottom: 80px; /* Margen invisible para la publicidad */
 }
 
 /* --- 2. ANIMACIONES Y EFECTOS (NIEBLA) --- */
@@ -128,7 +129,7 @@ html, body {
 .spin-wrapper {
     position: absolute; right: 5%; top: 55%; transform: translateY(-50%); 
     display: flex; flex-direction: column; align-items: center; justify-content: center; 
-    z-index: 10; pointer-events: auto;
+    z-index: 11; pointer-events: auto;
 }
 
 /* --- 6. TOOLTIP (DESCRIPCIONES) --- */
@@ -181,7 +182,6 @@ html, body {
 #switchFiltro:checked + .slider-grande-round { background-color: #9c27b0; border-color: #ba68c8; }
 #switchFiltro:checked + .slider-grande-round:before { transform: translateX(30px); }
 
-/* ICONOS DE AYUDA (UNIFICADOS) */
 .icono-ayuda, .icono-ayuda-menu {
     display: inline-block;
     width: 20px;
@@ -220,11 +220,26 @@ html, body {
 
 .btn-morado:hover { background-color: #9c27b0; border-color: #ba68c8; }
 
-/* --- ESTILO BASE PARA EL BOTÓN DE USUARIO --- */
+.distintivo-asesino {
+    border-bottom-color: #f44336 !important; 
+}
+
+/* Animación de destello */
+.efecto-shuffle {
+    animation: flashFade 0.5s ease-in-out;
+}
+
+@keyframes flashFade {
+    0% { filter: blur(0px) brightness(1); }
+    50% { filter: blur(8px) brightness(2); }
+    100% { filter: blur(0px) brightness(1); }
+}
+
+/* --- 9. SECCIÓN INFERIOR (USUARIO Y AVISOS) --- */
 #SeccionUsuario {
     cursor: pointer;
-    z-index: 90; /* Por debajo del menú lateral que tiene 100 */
-    pointer-events: auto; /*A segura que reciba clics */
+    z-index: 90; 
+    pointer-events: auto; 
 }
 
 #BtnUsuario {
@@ -247,87 +262,20 @@ html, body {
     border-radius: 50%;
 }
 
-/* --- 9. RESPONSIVE (MÓVIL) --- */
-@media (max-width: 850px) {
-    .menu-lateral { width: 100%; }
-    
-    .contenedor-principal .btn-estilo-dbd {
-        position: absolute;
-        bottom:70px;
-        left: 50%;
-        transform: translateX(-50%) scale(0.8); /* Lo centra y lo hace un poco más pequeño */
-        z-index: 10;
-    }
-    #SeccionUsuario {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%) scale(0.8);
-    }
-    .titulo-principal { font-size: 29px; }
-    .btn-hamburguesa { top: 60px; }
-    
-    .santuario-wrapper { 
-        top: 150px; left: 2%; 
-        transform: scale(0.7); transform-origin: top left; 
-    }
-    
-    .spin-wrapper { 
-        top: 150px; right: 2%; 
-        transform: scale(0.6); transform-origin: top right; z-index: 20; 
-        transform: scale(0.45) !important;
-        transform-origin: top right;
-    }
-    
-    .centro-wrapper { top: 50px; width: 230px; height: 230px; margin: 0; }
-    .carta-perk { width: 100px; height: 100px; }
-
-    #ContenedorFiltro {
-        left: 50%;
-        transform: translateX(-50%) scale(0.8);
-        opacity: 1;
-    }
-}
-
-/* Landscape Móvil */
-@media (max-width: 850px) and (orientation: landscape) {
-    .btn-hamburguesa { top: 15px; }
-    .contenedor-principal { padding-top: 150px; padding-bottom: 50px; }
-    .santuario-wrapper, .spin-wrapper { top: 90px; }
-}
-
-/* Colores Dinámicos */
-.distintivo-asesino {
-    border-bottom-color: #f44336 !important; 
-}
-
-/* Animación de destello y desvanecimiento */
-.efecto-shuffle {
-    animation: flashFade 0.5s ease-in-out;
-}
-
-@keyframes flashFade {
-    0% { opacity: 1; filter: brightness(1); }
-    50% { opacity: 0; filter: brightness(3); }
-    100% { opacity: 1; filter: brightness(1); }
-}
-
-/* --- CONTENEDOR GENERAL DE LOS BOTONES --- */
 #ContenedorBotonesInferior {
-    position: fixed;
-    bottom: 20px;
+    position: absolute; 
+    bottom: 80px; 
     left: 20px;
     display: flex;
     align-items: center;
-    gap: 12px; /* Separación horizontal entre botones */
-    z-index: 150; /* Por encima de la niebla y otros wrappers */
+    gap: 12px;
+    z-index: 2000;
 }
 
-/* --- ESTILO DEL BOTÓN CUADRADO DE AVISOS --- */
 #BtnAvisos {
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid #555;
-    width: 42px;  /* Ajuste exacto para emparejar la altura del botón de invitado */
+    width: 42px;  
     height: 42px;
     display: flex;
     align-items: center;
@@ -346,7 +294,7 @@ html, body {
     transform: scale(1.05);
 }
 
-/* --- ESTILOS DEL MODAL (POP-UP) EN EL CENTRO --- */
+/* --- 10. MODAL DE AVISOS --- */
 .modal-fondos-avisos {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -363,7 +311,7 @@ html, body {
     border: 2px solid #555;
     border-radius: 10px;
     width: 340px;
-    max-height: 80vh; /* No permite que se desborde de la pantalla */
+    max-height: 80vh;
     display: flex;
     flex-direction: column;
     color: white;
@@ -380,7 +328,6 @@ html, body {
     padding-bottom: 10px;
 }
 
-/* Caja interna con scroll para soportar textos infinitos */
 .cuerpo-avisos-scroll {
     overflow-y: auto;
     padding-right: 10px;
@@ -400,20 +347,73 @@ html, body {
     color: #ddd;
 }
 
-/* --- AJUSTE RESPONSIVE PARA CELULARES --- */
+/* --- 11. BARRA DE PUBLICIDAD --- */
+#BarraPublicidad {
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(10, 10, 10, 0.98);
+    border-top: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4000; 
+}
+
+/* --- 12. RESPONSIVE (MÓVILES) --- */
 @media (max-width: 850px) {
-    /* Eliminamos el absolute individual de SeccionUsuario que tenías en la línea 193 */
-    .menu-lateral ~ .contenedor-principal #SeccionUsuario {
-        position: static !important;
-        transform: none !important;
+    .menu-lateral { width: 100%; }
+    .titulo-principal { font-size: 29px; }
+    .btn-hamburguesa { top: 60px; }
+    
+    .santuario-wrapper { 
+        top: 150px; left: 2%; 
+        transform: scale(0.7); transform-origin: top left; 
+    }
+    
+    .spin-wrapper { 
+        top: 150px; right: 2%; 
+        transform: scale(0.45) !important;
+        transform-origin: top right; z-index: 20; 
+    }
+    
+    .centro-wrapper { top: 50px; width: 230px; height: 230px; margin: 0; }
+    .carta-perk { width: 100px; height: 100px; }
+
+    #ContenedorFiltro {
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+        opacity: 1;
     }
 
-    /* Forzamos al contenedor grupal a centrarse abajo en móviles */
+    .menu-lateral ~ .contenedor-principal #SeccionUsuario {
+        position: static;
+        transform: none;
+    }
+
+    /* --- ALTURAS MÓVILES  --- */
+    .contenedor-principal .btn-estilo-dbd {
+        position: absolute;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+        z-index: 2000;
+    }
+
     #ContenedorBotonesInferior {
-        position: absolute !important;
-        bottom: 10px !important;
-        left: 50% !important;
-        transform: translateX(-50%) scale(0.85) !important;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.85);
         width: max-content;
     }
+}
+
+/* Landscape Móvil */
+@media (max-width: 850px) and (orientation: landscape) {
+    .btn-hamburguesa { top: 15px; }
+    .contenedor-principal { padding-top: 150px; padding-bottom: 50px; }
+    .santuario-wrapper, .spin-wrapper { top: 90px; }
 }
