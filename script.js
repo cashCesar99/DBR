@@ -26,8 +26,14 @@ function procesarLogin() {
     const user = document.getElementById("userInput").value.trim();
     const pass = document.getElementById("passInput").value.trim();
 
+    // 1. Validar que no estén vacíos
     if (user === "" || pass === "") {
         alert("Please fill all fields");
+        return;
+    }
+
+    if (user.length > 20) {
+        alert("Username cannot exceed 20 characters.");
         return;
     }
 
@@ -1910,18 +1916,6 @@ const Asesinos = [
             { Nombre: "Hex hive mind", imagen: "Resources/Images/Perks/Killer/First/hex-hive-mind.png", activa: true, descripcion: "Survivors working on the same Generator suffer from the Exposed status effect." },
             { Nombre: "Secret project", imagen: "Resources/Images/Perks/Killer/First/secret-project.png", activa: true, descripcion: "Kicking a Generator locks it, preventing any progress for a limited time." },
             { Nombre: "Turn back the clock", imagen: "Resources/Images/Perks/Killer/First/turn-back-the-clock.webp", activa: true, descripcion: "Whenever a Survivor is healed, you see their Aura and they suffer from the Hemorrhage status effect." }
-        ]
-    },
-    {
-        Nombre: "Slenderman",
-        Retrato: "Resources/Images/Perks/Killer/Slenderman/killer-idea-slender-man-v0-lm6jemduf1tc1.webp",
-        PersonajeActivo: true,
-        SiempreActivo: false,
-        SinPerks: true,
-        Perks: [
-            { Nombre: "", imagen: "", activa: false },
-            { Nombre: "", imagen: "", activa: false },
-            { Nombre: "", imagen: "", activa: false }
         ]
     },
     {

@@ -288,6 +288,31 @@ html, body {
     box-sizing: border-box;
 }
 
+/* --- ESTILO DEL BOTÓN DE DONACIONES --- */
+#BtnDonar, #BtnFacebook {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #555;
+    height: 42px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 15px;
+    transition: 0.3s ease;
+    box-sizing: border-box;
+}
+
+#BtnDonar:hover, #BtnFacebook:hover {
+    background: #222;
+    border-color: #29abe0;
+    transform: scale(1.05);
+}
+
 #BtnAvisos:hover {
     background: #222;
     border-color: #9c27b0;
@@ -396,7 +421,7 @@ html, body {
     /* --- ALTURAS MÓVILES  --- */
     .contenedor-principal .btn-estilo-dbd {
         position: absolute;
-        bottom: 70px;
+        bottom: 90px;
         left: 50%;
         transform: translateX(-50%) scale(0.8);
         z-index: 2000;
@@ -414,6 +439,26 @@ html, body {
 /* Landscape Móvil */
 @media (max-width: 850px) and (orientation: landscape) {
     .btn-hamburguesa { top: 15px; }
-    .contenedor-principal { padding-top: 150px; padding-bottom: 50px; }
+    
+    /* Reduce el padding superior para subir el rombo */
+    .contenedor-principal { padding-top: 50px; padding-bottom: 60px; } 
     .santuario-wrapper, .spin-wrapper { top: 90px; }
+
+    /* 1. Ajuste independiente del Rombo */
+    .centro-wrapper {
+        transform: scale(0.65);
+        margin-top: -20px;
+    }
+
+    /* 2. Ajuste independiente del Botón Shuffle */
+    .contenedor-principal .btn-estilo-dbd {
+        bottom: 50px; /* Controla la altura de Shuffle SOLO cuando está acostado */
+        transform: translateX(-50%) scale(0.7); /* Lo hace un poco más pequeño */
+    }
+
+    /* 3. Ajuste independiente de Guest y Notificaciones */
+    #ContenedorBotonesInferior {
+        bottom: 2px; /* Controla la altura de Guest SOLO cuando está acostado */
+        transform: translateX(-50%) scale(0.75);
+    }
 }
